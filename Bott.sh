@@ -1,23 +1,8 @@
-#!/bin/bash
-################################################################################
-#
-# Scrip Created by http://CryptoLions.io
-# Claim Rewards Bot
-#
-# Claims each 24h+1min, sends telegram report and saves all into log.
-#
-# Edit config.json with your data and run start.sh to run bot in background
-# !!! Compile claim_reward.sh to claim_reward using shc (readme)  or edit line 34
-#
-# https://github.com/CryptoLions/
-#
-################################################################################
-
-config="config.json"
+config="my_config.json"
 BP_NAME="$( jq -r '.BP_NAME' "$config" )";
 CLAIM_INTERVAL="$( jq -r '.CLAIM_INTERVAL' "$config" )";
-TELEGRAM_BOT_ID="$( jq -r '.TELEGRAM_BOT_ID' "$config" )";
-TELEGRAM_CHAT_IDS=($( jq -r '.TELEGRAM_CHAT_IDS' "$config" ));
+TELEGRAM_BOT_ID="$( jq -r '.6882566523:AAH4ajs0k1dq6sKE91rVXi0Vosvg_JiiA1A' "$config" )";
+TELEGRAM_CHAT_IDS=($( jq -r '.Ziajuaaa' "$config" ));
 
 TELEGRAM_API="https://api.telegram.org/bot";
 TELEGRAM_SEND_MSG=$TELEGRAM_API$TELEGRAM_BOT_ID"/sendMessage";
@@ -35,7 +20,7 @@ claim_reward(){
 
     ERR=$(cat stderr.txt)
     rm stderr.txt
-    #CLAIM=$(cat claim)
+    
     echo "CLAIN REWARD $(date)" >> log.txt
     echo "--stdout-----------------------" >> log.txt
     echo $CLAIM  >> log.txt
@@ -44,7 +29,7 @@ claim_reward(){
     echo "-------------------------" >> log.txt
 
     if [[ "$ERR" == *"Error"* && "$CLAIM" == "" ]]; then
-	#claim error
+	
 	sendmessage "Error on claim. Will try again in 2 min..."
 	sleep 120
 	claim_reward "";
@@ -75,10 +60,10 @@ claim_reward(){
 		AMOUNT_=${AMOUNT_A[0]}
 		AMOUNT=${AMOUNT_//\./}
 
-		#TOTAL=$(echo "$TOTAL+$AMOUNT" | bc)
+		
 		TOTAL=$(($TOTAL+$AMOUNT))
 
-	        #TOTAL=$(($TOTAL+$((${AMOUNT[0]}*1000))));
+	        
 	        if [ "$OUTPUT" != "" ]; then
 	    	    OUTPUT="$OUTPUT----------\n";
 		fi
